@@ -3,7 +3,7 @@ var fetchButton = document.getElementById('fetch-button');
 
 function getApi() {
     // fetch request gets current weather information
-     var requestUrl = 'http://api.openweathermap.org/data/2.5/weather?q=dallas&appid=820c7f8138019a10c7af3d05720e11d9';
+     var requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=dallas&appid=820c7f8138019a10c7af3d05720e11d9';
 
     fetch(requestUrl)
         .then(function (response) {

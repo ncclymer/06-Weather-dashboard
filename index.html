@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
 
     <header id="main-title">Weather Dashboard</header>
-    <h1 class="text-primary">Search by city:</h1> 
+    <h1 class="text-primary">Search by city:</h1>
 
     <div id="search-form">
-        <input id="search-input" type="text" placeholder="City name here!">
+        <input id="search-input" type="text" placeholder="Type in a city name here!">
         <button class="btn btn-info btn-block" id="fetch-button">Search</button>
     </div>
-    
-    <div id="search-results">Current conditions:
-        <p>Temp: <span id='temp'></span><br /></p>
-        <p>Humidty: <span id='humidity'></span><br /></p>
-        <p>Wind Speed: <span id='wind-speed'></span><br /></p>
-        <p id="uvi">UV Index: <span id='UVindex'></span><br /></p>
+
+    <div id="search-results">
+        <p><span id='city'></span><br /></p>
+        <p><span id='temp'></span><br /></p>
+        <p><span id='humidity'></span><br /></p>
+        <p></p> <span id='wind-speed'></span><br /></p>
+        <p id="uvi"><span id='UVindex'></span><br /></p>
     </div>
 
     <div id="five-day-forcast">
@@ -36,5 +39,6 @@
 
 </body>
 
-<script src="/js/script.js"></script>
+<script src="./js/script.js"></script>
+
 </html>

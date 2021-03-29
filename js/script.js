@@ -15,27 +15,42 @@ function getWeather(event) {
       return response.json();
     })
     .then(function (data) {
-      // document.getElementById('date').textContent = data.name = ' ' + ' ' + moment().format('MMM D, YYYY');
-      document.getElementById('city').textContent = 'Current conditions for: ' + data.name;
+      document.getElementById('date').textContent = data.name = ' ' + ' ' + moment().format('MMM D, YYYY');
+      document.getElementById('city').textContent = 'Current conditions for: ' + userInput;
+      day0Icon = document.getElementById('0-icon')
+      day0Icon.setAttribute('src', 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png');
       document.getElementById('temp').textContent = 'Temperature: ' + data.main.temp + ' °F';
       document.getElementById('humidity').textContent = 'Humidty: ' + data.main.humidity + '%';
       document.getElementById('wind-speed').textContent = 'Wind Speed: ' + data.wind.speed + ' MPH';
       console.log(data)
 
-   var uvIndexUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=${apiKey}9&units=imperial`;
+      var uvIndexUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=${apiKey}&units=imperial`;
 
-  fetch(uvIndexUrl)
-    .then(function (response) {
-      return response.json();
-      console.log(response.json)
+      fetch(uvIndexUrl)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          document.getElementById('UVindex').textContent = '' + 'UV Index: ' + data.current.uvi + '';
+          console.log(data);
+
+          if (data.current.uvi <= 2) {
+            document.getElementById('UVindex').className = 'low';
+            console.log(data.current.uvi)
+          }
+          // else if (data.current.uvi > 2 || < 5) {
+          //   document.getElementById('UVindex').className = 'moderate';
+          // }
+          // else if (data.current.uvi > 5 || < 7 ) {
+          //   document.getElementById('UVindex').className = 'high';
+          // }
+          // else if (data.current.uvi > 7) {
+          //   document.getElementById('UVindex').className = 'very-high'
+          // }
+
+        });
     })
-    .then(function (data) {
-      document.getElementById('UVindex').textContent = '' + 'UV Index: ' + data.current.uvi + '';
-      console.log(data);
-    });
-  })
 }
-
 
 // calls 5 day forcast
 function getFiveDay(event) {
@@ -98,5 +113,4 @@ function getFiveDay(event) {
 
 // user click event for target button
 fetchButton.addEventListener('click', getWeather);
-// fetchButton.addEventListener('click', getUvi);
 fetchButton.addEventListener('click', getFiveDay);

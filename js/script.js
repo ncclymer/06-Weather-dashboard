@@ -38,15 +38,15 @@ function getWeather(event) {
             document.getElementById('UVindex').className = 'low';
             console.log(data.current.uvi)
           }
-          // else if (data.current.uvi > 2 || < 5) {
-          //   document.getElementById('UVindex').className = 'moderate';
-          // }
-          // else if (data.current.uvi > 5 || < 7 ) {
-          //   document.getElementById('UVindex').className = 'high';
-          // }
-          // else if (data.current.uvi > 7) {
-          //   document.getElementById('UVindex').className = 'very-high'
-          // }
+          else if (data.current.uvi > 2 || data.current.uvi < 5) {
+            document.getElementById('UVindex').className = 'moderate';
+          }
+          else if (data.current.uvi > 5 || data.current.uvi < 7 ) {
+            document.getElementById('UVindex').className = 'high';
+          }
+          else if (data.current.uvi > 7) {
+            document.getElementById('UVindex').className = 'very-high'
+          }
 
         });
     })

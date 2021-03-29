@@ -1,11 +1,15 @@
 // Api data URLs
 
+var apiKey = '820c7f8138019a10c7af3d05720e11d9'
+
+var userInput = document.querySelector('#search-input').value;
+
+
 // requestUrl = 'https://api.openweathermap.org/data/2.5/weather/?q=' + userInput + '&units=imperial&appid=820c7f8138019a10c7af3d05720e11d9';
 
 uvIndexUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=39.7392&lon=-104.9847&units=imperial&appid=820c7f8138019a10c7af3d05720e11d9';
 // uvIndexUrl = 'https://api.openweathermap.org/data/2.5/onecall?' + lat + '&' + lon + '&units=imperial&appid=820c7f8138019a10c7af3d05720e11d9';
 
-fiveDayUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=denver&units=imperial&appid=820c7f8138019a10c7af3d05720e11d9';
 // fiveDayUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + userInput + '&units=imperial&appid=820c7f8138019a10c7af3d05720e11d9';
 
 
@@ -13,31 +17,45 @@ fiveDayUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=denver&units=im
 // function target button
 fetchButton = document.querySelector('#fetch-button');
 
-// // function converts URL parameters into an array
-// function convertParameters() {
-//   var paramArray = document.location.search.split('&');
-//   var query = paramArray[0].split('=').pop();
-//   searchApi(query);
-// }
-
-
 // calls temp, humidity, and wind speed * need to write concat so that user data is entered into the ?q={X} portion of the query string.
 function getWeather(event) {
   event.preventDefault();
-  requestUrl = 'https://api.openweathermap.org/data/2.5/weather/?q=denver&units=imperial&appid=820c7f8138019a10c7af3d05720e11d9';
-
+  var userInput = document.querySelector('#search-input').value;
+  var requestUrl = `https://api.openweathermap.org/data/2.5/weather/?q=${userInput}&units=imperial&appid=${apiKey}`;
+  
   fetch(requestUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      document.getElementById('city').textContent = 'Current conditions for: ' + data.name + data.weather[0].icon;
-      document.getElementById('temp').textContent = 'Temperature:' + data.main.temp + ' °F';
-      document.getElementById('humidity').textContent = 'Humidty:' +  data.main.humidity + '%';
-      document.getElementById('wind-speed').textContent = 'Wind Speed:' + data.wind.speed + ' MPH';
+      // document.getElementById('date').textContent = data.name = ' ' + ' ' + moment().format('MMM D, YYYY');
+      document.getElementById('city').textContent = 'Current conditions for: ' + data.name;
+      document.getElementById('temp').textContent = 'Temperature: ' + data.main.temp + ' °F';
+      document.getElementById('humidity').textContent = 'Humidty: ' +  data.main.humidity + '%';
+      document.getElementById('wind-speed').textContent = 'Wind Speed: ' + data.wind.speed + ' MPH';
       console.log(data)
     });
 }
+
+// function loadData() {
+
+//   var loadData = localStorage.getItem("cities")
+//   if (loadData == null || loadData == "") return;
+
+//   var cityButtonArr = JSON.parse(loadData)
+
+//   for (i = 0; i < cityButtonArr.length; i++) {
+//       var createBtn = $("<button>")
+//       createBtn.attr("class", "btn btn-outline-secondary")
+//       createBtn.attr("type", "button")
+//       createBtn.attr("id", 'searchCityHistory')
+//       createBtn.attr("onclick", submitBtn)
+//       createBtn.text(cityButtonArr[i])
+//    // createBtn.setAttribute("onclick",submitBtn)
+//    // createBtn.addEventListener('click', submitBtn)
+//   }
+//   $("#cityhistory").append(createBtn)
+// }
 
 // calls uvi index * need to pull lat and lon data from first array
 function getUvi(event) {
@@ -48,7 +66,7 @@ function getUvi(event) {
       return response.json();
     })
     .then(function (data) {
-      document.getElementById('UVindex').textContent = 'UV Index:' + data.current.uvi;
+      document.getElementById('UVindex').textContent = '' + 'UV Index: ' + data.current.uvi + '';
       console.log(data);
     });
 }
@@ -56,13 +74,22 @@ function getUvi(event) {
 // calls 5 day forcast
 function getFiveDay(event) {
   event.preventDefault();
+  var userInput = document.querySelector('#search-input').value;
+  fiveDayUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${userInput}&units=imperial&appid=${apiKey}`;
+
 
   fetch(fiveDayUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      document.getElementById('day1').textContent = data.list[2].dt_txt;
+      day1Date = document.getElementById('1-date');
+      day1Icon = document.getElementById("1-icon");
+      day1Date.textContent = moment.unix(data.list[2].dt).format("MMM D, YYYY");
+      day1Icon.setAttribute("src", "http://openweathermap.org/img/w/" + data.list[2].weather[0].icon + ".png");
+      document.getElementById('1temp').textContent = 'Temp: ' + data.list[2].main.temp + ' °F';
+      document.getElementById('1humidity').textContent = 'Humidity: ' + data.list[2].main.humidity + ' %';
+      document.getElementById('1wind-speed').textContent = 'Wind: ' + data.list[2].wind.speed + ' MPH';
       console.log(data);
     });
 }

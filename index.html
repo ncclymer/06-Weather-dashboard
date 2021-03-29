@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
@@ -14,31 +15,121 @@
     <header id="main-title">Weather Dashboard</header>
     <h1 class="text-primary">Search by city:</h1>
 
+    <main class="container-fluid">
+    <section class="col-12 col-md-4 float-left">
     <div id="search-form">
         <input id="search-input" type="text" placeholder="Type in a city name here!">
         <button class="btn btn-info btn-block" id="fetch-button">Search</button>
     </div>
+</section>
 
+    <div class="col-8 float-right">
+        <section class="card jumbotron  bg-light text-dark custom-dash">
     <div id="search-results">
+        <p><span id='date'></span></p>
         <p><span id='city'></span><br /></p>
         <p><span id='temp'></span><br /></p>
         <p><span id='humidity'></span><br /></p>
         <p></p> <span id='wind-speed'></span><br /></p>
-        <p id="uvi"><span id='UVindex'></span><br /></p>
+        <p id="uvi"></p><span id='UVindex'></span><br /></p>
     </div>
+    <section>
+        <h2>5 Day Forcast</h2>
+        <div id="five-day-forcast" class="row">
+            <div class=" col-sm-2">
+                <div class="five-day-card  text-white bg-primary mb-3">
+                    <div id="1" class="card-body">
+                        <p class="card-text">
+                        <div id="1-date"></div>
+                        <img src="" alt="" id="1-icon" class="images">
+                        <br>
+                        <div id="1temp"></div>
+                        <br>
+                        <div id="1humidity"></div>
+                        <br>
+                        <div id="1wind-speed"></div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="five-day-card  text-white bg-primary mb-3">
+                    <div id="2" class="card-body">
+                        <p class="card-text">
+                        <div id="2-date"></div>
+                        <img src="" alt="" id="2-icon" class="images">
+                        <br>
+                        <div id="2temp"></div>
+                        <br>
+                        <div id="2humidity"></div>
+                        <br>
+                        <div id="2wind-speed"></div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="five-day-card  text-white bg-primary mb-3">
+                    <div id="3" class="card-body">
+                        <p class="card-text">
+                        <div id="3-date"></div>
+                        <img src="" alt="" id="3-icon" class="images">
+                        <br>
+                        <div id="3temp"></div>
+                        <br>
+                        <div id="3humidity"></div>
+                        <br>
+                        <div id="3wind-speed"></div>
 
-    <div id="five-day-forcast">
-        <ul>
-            <li class="day"><span id='day1'></span></li>
-            <li class="day"><span id='day2'></span></li>
-            <li class="day"><span id='day3'></span></li>
-            <li class="day"><span id='day4'></span></li>
-            <li class="day"><span id='day5'></span></li>
-        </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="five-day-card  text-white bg-primary mb-3">
+                    <div id="4" class="card-body">
+                        <p class="card-text">
+                        <div id="4-date"></div>
+                        <img src="" alt="" id="4-icon" class="images">
+                        <br>
+                        <div id="4temp"></div>
+                        <br>
+                        <div id="4humidity"></div>
+                        <br>
+                        <div id="4wind-speed"></div>
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="five-day-card  text-white bg-primary mb-3">
+                    <div id="5" class="card-body">
+                        <p class="card-text">
+                        <div id="5-date"></div>
+                        <img src="" alt="" id="5-icon" class="images">
+                        <br>
+                        <div id="5temp"></div>
+                        <br>
+                        <div id="5humidity"></div>
+                        <br>
+                        <div id="5wind-speed"></div>
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+    </section>
+
+    
+       
     </div>
+</main>
 
 </body>
 
 <script src="./js/script.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 
 </html>

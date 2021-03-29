@@ -1,9 +1,19 @@
 #main-title {
-    height: 80px;
+    height: 100px;
     width: 100%;
-    background-color: green;
+    background-color: rgb(101, 230, 247);
+    font-family: serif;
     font-size: 40px;
-    font: white;
+    font-weight: bolder;
+    text-align: center;
+}
+
+body {
+    background-color: rgb(22, 167, 224);
+}
+
+h1.text-primary {
+    color: black;
 }
 
 #UVindex {

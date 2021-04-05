@@ -27,15 +27,11 @@ body {
 .very-high {
     background-color: red;
 }
-
+/* 
 #search-request {
     background-color: brown;
-}
+} */
 
 #current-condition {
     background-color: cadetblue;
 }
-
-/* #UVindex {
-    background-color: red;
-} */

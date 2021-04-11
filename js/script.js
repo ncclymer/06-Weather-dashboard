@@ -1,9 +1,6 @@
 var apiKey = '820c7f8138019a10c7af3d05720e11d9'
 var userInput = document.querySelector('#search-input').value;
 var city_Array = [];
-// var searchList = [];
-
-
 
 // function target button
 fetchButton = document.querySelector('#fetch-button');
@@ -62,7 +59,6 @@ function getFiveDay(event) {
   var userInput = document.querySelector('#search-input').value;
   fiveDayUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${userInput}&units=imperial&appid=${apiKey}`;
 
-
   fetch(fiveDayUrl)
     .then(function (response) {
       return response.json();
@@ -81,7 +77,7 @@ function getFiveDay(event) {
       day2Icon = document.getElementById("2-icon");
       day2Date.textContent = moment.unix(data.list[2].dt).format("MMM D, YYYY");
       day2Icon.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[10].weather[0].icon + ".png");
-      document.getElementById('2temp').textContent = 'Temp: ' + data.list[10].main.temp + '°F';
+      document.getElementById('2temp').textContent = 'Temp: ' + data.list[10].main.temp + ' °F';
       document.getElementById('2humidity').textContent = 'Humidity: ' + data.list[10].main.humidity + '%';
       document.getElementById('2wind-speed').textContent = 'Wind: ' + data.list[10].wind.speed + 'MPH';
 
@@ -90,7 +86,7 @@ function getFiveDay(event) {
       day3Icon = document.getElementById("3-icon");
       day3Date.textContent = moment.unix(data.list[2].dt).format("MMM D, YYYY");
       day3Icon.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[18].weather[0].icon + ".png");
-      document.getElementById('3temp').textContent = 'Temp: ' + data.list[18].main.temp + '°F';
+      document.getElementById('3temp').textContent = 'Temp: ' + data.list[18].main.temp + ' °F';
       document.getElementById('3humidity').textContent = 'Humidity: ' + data.list[18].main.humidity + '%';
       document.getElementById('3wind-speed').textContent = 'Wind: ' + data.list[18].wind.speed + 'MPH';
 
@@ -99,7 +95,7 @@ function getFiveDay(event) {
       day4Icon = document.getElementById("4-icon");
       day4Date.textContent = moment.unix(data.list[2].dt).format("MMM D, YYYY");
       day4Icon.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[26].weather[0].icon + ".png");
-      document.getElementById('4temp').textContent = 'Temp: ' + data.list[26].main.temp + '°F';
+      document.getElementById('4temp').textContent = 'Temp: ' + data.list[26].main.temp + ' °F';
       document.getElementById('4humidity').textContent = 'Humidity: ' + data.list[26].main.humidity + '%';
       document.getElementById('4wind-speed').textContent = 'Wind: ' + data.list[26].wind.speed + 'MPH';
 
@@ -108,21 +104,20 @@ function getFiveDay(event) {
       day5Icon = document.getElementById("5-icon");
       day5Date.textContent = moment.unix(data.list[2].dt).format("MMM D, YYYY");
       day5Icon.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[34].weather[0].icon + ".png");
-      document.getElementById('5temp').textContent = 'Temp: ' + data.list[34].main.temp + '°F';
+      document.getElementById('5temp').textContent = 'Temp: ' + data.list[34].main.temp + ' °F';
       document.getElementById('5humidity').textContent = 'Humidity: ' + data.list[34].main.humidity + '%';
       document.getElementById('5wind-speed').textContent = 'Wind: ' + data.list[34].wind.speed + 'MPH';
       console.log(data);
     });
 }
 
-
-function savedCities(searchCity) {
-  city_Array.push(searchCity)
-  //city_Array = [ searchCity, searchCitySubmit ];
+// Search recall
+function savedCities(userInput) {
+  city_Array.push(userInput)
   console.log("city array variable: ", city_Array);
   localStorage.setItem("cities", JSON.stringify(city_Array));
-
 }
+
 function loadData() {
 
   var loadData = localStorage.getItem("cities")
@@ -137,15 +132,19 @@ function loadData() {
     createBtn.attr("id", 'searchCityHistory')
     createBtn.attr("onclick", submitBtn)
     createBtn.text(cityButtonArr[i])
-    // createBtn.setAttribute("onclick",submitBtn)
-    // createBtn.addEventListener('click', submitBtn)
   }
-  $("#cityhistory").append(createBtn)
+  $("#search-history").append(createBtn)
 }
 
+function submitBtn() {
+  console.log("Logged data")
+  var elem = document.getElementById('searchCityHistory')
+  console.log(elem)
+}
 
 // user click event for target button
 fetchButton.addEventListener('click', getWeather);
 fetchButton.addEventListener('click', getFiveDay);
-fetchButton.addEventListener('click', searchHistory);
-fetchButton.addEventListener('click', oldData);
+fetchButton.addEventListener('click', savedCities);
+fetchButton.addEventListener('click', loadData);
+fetchButton.addEventListener('click', submitBtn);
